@@ -1,9 +1,13 @@
 ### Deep Learning Follow Me Project
 
+All the submission related files have been put in the submission_files folder in the
+root directory of the github repo.
+
 ## Introduction
 The project was aimed at implementing a Drone Simulation to follow a moving entity 
 in an environment with multiple distractions. A fully convolutional neural network with 
 multiple hidden layers was used to used to accomplish this.
+
 
 ## Data Collection
 Data collection was performed by using the simulator. Specifically, two cases were covered.

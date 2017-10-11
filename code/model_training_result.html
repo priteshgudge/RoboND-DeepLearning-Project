@@ -11932,7 +11932,7 @@ Alternatively, you can collect additional data of your own to improve your model
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">encoder_block</span><span class="p">(</span><span class="n">input_layer</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">strides</span><span class="p">):</span>
@@ -11965,22 +11965,22 @@ Alternatively, you can collect additional data of your own to improve your model
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">decoder_block</span><span class="p">(</span><span class="n">small_ip_layer</span><span class="p">,</span> <span class="n">large_ip_layer</span><span class="p">,</span> <span class="n">filters</span><span class="p">):</span>
     
     <span class="c1"># TODO Upsample the small input layer using the bilinear_upsample() function.</span>
-    <span class="n">upsampled</span> <span class="o">=</span> <span class="n">bilinear_upsample</span><span class="p">(</span><span class="n">small_ip_layer</span><span class="p">)</span>
+    <span class="n">upsampled_layer</span> <span class="o">=</span> <span class="n">bilinear_upsample</span><span class="p">(</span><span class="n">small_ip_layer</span><span class="p">)</span>
     
     <span class="c1"># TODO Concatenate the upsampled and large input layers using layers.concatenate</span>
-    <span class="n">concat_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">upsampled</span><span class="p">,</span> <span class="n">large_ip_layer</span><span class="p">])</span>
+    <span class="n">concat_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">upsampled_layer</span><span class="p">,</span> <span class="n">large_ip_layer</span><span class="p">])</span>
     
     <span class="c1"># TODO Add some number of separable convolution layers</span>
-    <span class="n">output_layer1</span> <span class="o">=</span> <span class="n">separable_conv2d_batchnorm</span><span class="p">(</span><span class="n">concat_layer</span><span class="p">,</span> <span class="n">filters</span><span class="p">)</span>
-    <span class="n">output_layer2</span> <span class="o">=</span> <span class="n">separable_conv2d_batchnorm</span><span class="p">(</span><span class="n">output_layer1</span><span class="p">,</span> <span class="n">filters</span><span class="p">)</span>
+    <span class="n">hidden_output_layer</span> <span class="o">=</span> <span class="n">separable_conv2d_batchnorm</span><span class="p">(</span><span class="n">concat_layer</span><span class="p">,</span> <span class="n">filters</span><span class="p">)</span>
+    <span class="n">output_layer</span> <span class="o">=</span> <span class="n">separable_conv2d_batchnorm</span><span class="p">(</span><span class="n">hidden_output_layer</span><span class="p">,</span> <span class="n">filters</span><span class="p">)</span>
     
-    <span class="k">return</span> <span class="n">output_layer2</span>
+    <span class="k">return</span> <span class="n">output_layer</span>
 </pre></div>
 
 </div>
@@ -12006,26 +12006,26 @@ Alternatively, you can collect additional data of your own to improve your model
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fcn_model</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">):</span>
     
     <span class="c1"># TODO Add Encoder Blocks. </span>
     <span class="c1"># Remember that with each encoder layer, the depth of your model (the number of filters) increases.</span>
-    <span class="n">l1</span> <span class="o">=</span> <span class="n">encoder_block</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">l2</span> <span class="o">=</span> <span class="n">encoder_block</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">layer_1</span> <span class="o">=</span> <span class="n">encoder_block</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">layer_2</span> <span class="o">=</span> <span class="n">encoder_block</span><span class="p">(</span><span class="n">layer_1</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
     <span class="c1"># TODO Add 1x1 Convolution layer using conv2d_batchnorm().</span>
-    <span class="n">l3</span> <span class="o">=</span> <span class="n">conv2d_batchnorm</span><span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">layer_3</span> <span class="o">=</span> <span class="n">conv2d_batchnorm</span><span class="p">(</span><span class="n">layer_2</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     
     <span class="c1"># TODO: Add the same number of Decoder Blocks as the number of Encoder Blocks</span>
-    <span class="n">l4</span> <span class="o">=</span> <span class="n">decoder_block</span><span class="p">(</span><span class="n">l3</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
-    <span class="n">l5</span> <span class="o">=</span> <span class="n">decoder_block</span><span class="p">(</span><span class="n">l4</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+    <span class="n">layer_4</span> <span class="o">=</span> <span class="n">decoder_block</span><span class="p">(</span><span class="n">layer_3</span><span class="p">,</span> <span class="n">layer_1</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+    <span class="n">layer_5</span> <span class="o">=</span> <span class="n">decoder_block</span><span class="p">(</span><span class="n">layer_4</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
     
     
     <span class="c1"># The function returns the output layer of your model. &quot;x&quot; is the final layer obtained from the last decoder_block()</span>
-    <span class="k">return</span> <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">num_classes</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">l5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">num_classes</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">layer_5</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12046,7 +12046,7 @@ Alternatively, you can collect additional data of your own to improve your model
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
@@ -12086,7 +12086,7 @@ Alternatively, you can collect additional data of your own to improve your model
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.005</span>
@@ -25322,6 +25322,19 @@ number true positives: 204, number false positives: 6, number false negatives: 9
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
 </div>
 </div>
 

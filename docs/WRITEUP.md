@@ -91,23 +91,24 @@ The below are the confusion matrices for the scores:
 1. When the quad is following the target:
 The confusion matrix is:
 
-| C | F |
-| ---| --- |
-| 3 | 0   |
-| 0 | 539 | 
+| n=542| Predicted: No | Predicted: Yes |
+| ---| ---| --- |
+| Actual: No | 3 | 0   |
+| Actual: Yes | 0 | 539 | 
 
 2. When quad is on patrol and target is not visibile
 
-| C | F |
-| ---| --- |
-|  91 | 179 |
-|  0 | 0  |
+| n=270| Predicted: No | Predicted: Yes |
+| ---| ---| --- |
+| Actual: No |  91 | 179 |
+| Actual: Yes |  0 | 0  |
 
 3. Scores for target detection from away
 
+| n=322| Predicted: No | Predicted: Yes |
 | ---| --- |
-| 15| 6|
-| 97 | 204 |
+| Actual: No | 15| 6|
+| Actual: Yes | 97 | 204 |
 
 ## Conclusion
 The drone is able to track and follow the `hero` target in simulation even when the 

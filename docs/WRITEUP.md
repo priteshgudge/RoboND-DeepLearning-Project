@@ -106,7 +106,7 @@ The confusion matrix is:
 3. Scores for target detection from away
 
 | n=322| Predicted: No | Predicted: Yes |
-| ---| --- |
+| --- | ---| --- |
 | Actual: No | 15| 6|
 | Actual: Yes | 97 | 204 |
 

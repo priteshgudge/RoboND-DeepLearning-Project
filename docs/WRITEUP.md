@@ -90,14 +90,17 @@ The below are the confusion matrices for the scores:
 
 1. When the quad is following the target:
 The confusion matrix is:
+| ---| --- |
 | 3 | 0   |
 | 0 | 539 | 
 
 2. When quad is on patrol and target is not visibile
+| ---| --- |
 |  91 | 179 |
 |  0 | 0  |
 
 3. Scores for target detection from away
+| ---| --- |
 | 15| 6|
 | 97 | 204 |
 

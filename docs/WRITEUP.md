@@ -14,5 +14,7 @@ Second, the drone follows the target with a complicated path traced, also with c
 [Figure1]: ./misc/data_collection_1.png
 [Figure2]: ./misc/data_collection_1.png
 
-[!alt_text][Figure1] Figure1
-[!alt_text][Figure2] Figure2
+# Figure 1
+![alt_text][Figure1]
+# Figure 2
+![alt_text][Figure2]

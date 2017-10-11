@@ -103,3 +103,5 @@ ENV/
 
 RUNS/
 
+# Archives
+*.zip

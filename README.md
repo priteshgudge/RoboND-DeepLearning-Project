@@ -1,6 +1,6 @@
 [Project Submission WRITEUP](./WRITEUP.md)
 
-[Drone Simulator Download] (https://github.com/udacity/RoboND-DeepLearning-Project/releases/latest)
+[Drone Simulator Download](https://github.com/udacity/RoboND-DeepLearning-Project/releases/latest)
 
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
 
